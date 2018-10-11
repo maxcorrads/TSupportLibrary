@@ -1,6 +1,6 @@
 package it.matteocorradin.tsupportlibrary.component;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public abstract class OverlayFactoryProducer {
 

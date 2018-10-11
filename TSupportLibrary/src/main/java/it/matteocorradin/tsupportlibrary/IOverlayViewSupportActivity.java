@@ -1,11 +1,11 @@
 package it.matteocorradin.tsupportlibrary;
 
-import android.support.annotation.NonNull;
 import android.view.View;
 
-import it.matteocorradin.tsupportlibrary.component.SituatedComponent;
-
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import it.matteocorradin.tsupportlibrary.component.SituatedComponent;
 
 public interface IOverlayViewSupportActivity {
 

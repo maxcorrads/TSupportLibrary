@@ -1,11 +1,11 @@
 package it.matteocorradin.tsupportlibrary.adapter.holder;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LifecycleRegistry;
-import android.support.annotation.NonNull;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleRegistry;
 import it.matteocorradin.tsupportlibrary.adapter.model.AdapterDataGenericElement;
 
 public class ViewHolderWithLifecycle extends ViewHolder implements LifecycleOwner {

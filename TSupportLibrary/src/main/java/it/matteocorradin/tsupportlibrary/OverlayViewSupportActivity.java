@@ -1,7 +1,5 @@
 package it.matteocorradin.tsupportlibrary;
 
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -9,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import it.matteocorradin.tsupportlibrary.component.OverlayFactoryEnum;
 import it.matteocorradin.tsupportlibrary.component.OverlayFactoryProducer;
 import it.matteocorradin.tsupportlibrary.component.OverlayHandler;

@@ -1,8 +1,7 @@
 package it.matteocorradin.tsupportlibrary.adapter.utils;
 
-import android.support.annotation.NonNull;
-import android.support.v7.util.DiffUtil;
-
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import it.matteocorradin.tsupportlibrary.adapter.model.AdapterDataGenericElement;
 
 

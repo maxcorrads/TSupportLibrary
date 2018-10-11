@@ -1,8 +1,6 @@
 package it.matteocorradin.tsupportlibrary.maps;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -12,7 +10,8 @@ import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.List;
 
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import it.matteocorradin.tsupportlibrary.maps.model.CountryIso3;
 
 public class MapsUtils {

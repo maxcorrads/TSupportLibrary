@@ -1,45 +1,27 @@
 package it.matteocorradin.tsupportlibrary.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import it.matteocorradin.tsupportlibrary.adapter.HomeAdapter;
 import it.matteocorradin.tsupportlibrary.adapter.model.AdapterDataGenericElement;
-import it.matteocorradin.tsupportlibrary.adapter.utils.AdapterDataGenericElementDiffCallback;
 
 public abstract class MListFragment extends BaseFragment {
 
     protected RecyclerView recyclerView;
-    protected HomeAdapter adapter;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(getRecyclerViewResourceId());
-
-        Class<?> clazz = getAdapterClass();
-        if (clazz != null) {
-            Constructor<?> ctor;
-            try {
-                ctor = clazz.getConstructor(HomeAdapter.class);
-                Object object = ctor.newInstance(new AdapterDataGenericElementDiffCallback());
-                if (object instanceof HomeAdapter) {
-                    recyclerView.setAdapter((HomeAdapter) object);
-                }
-            } catch (IllegalAccessException | java.lang.InstantiationException | InvocationTargetException | NoSuchMethodException e) {
-                e.printStackTrace();
-            }
-        }
 
         recyclerView.setLayoutManager(getLayoutManager());
         List<RecyclerView.ItemDecoration> itemDecorations = getItemDecorations();
@@ -48,19 +30,20 @@ public abstract class MListFragment extends BaseFragment {
                 recyclerView.addItemDecoration(itemDecoration);
             }
         }
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(getAdapter());
     }
-
-    protected abstract Class<HomeAdapter> getAdapterClass();
 
     protected abstract @IdRes int getRecyclerViewResourceId();
 
     protected void updateList(){
+        HomeAdapter adapter = getAdapter();
         if (adapter != null) {
             adapter.submitList(getList());
-            adapter.notifyDataSetChanged();
+            //adapter.notifyDataSetChanged();
         }
     }
+
+    protected abstract HomeAdapter getAdapter();
 
     protected abstract List<AdapterDataGenericElement> getList();
 

@@ -1,11 +1,11 @@
 package it.matteocorradin.tsupportlibrary.adapter;
 
-import android.arch.lifecycle.Lifecycle;
-import android.support.annotation.NonNull;
-import android.support.v7.recyclerview.extensions.ListAdapter;
-import android.support.v7.util.DiffUtil;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import it.matteocorradin.tsupportlibrary.adapter.holder.ViewHolder;
 import it.matteocorradin.tsupportlibrary.adapter.holder.ViewHolderWithLifecycle;
 import it.matteocorradin.tsupportlibrary.adapter.model.AdapterDataGenericElement;

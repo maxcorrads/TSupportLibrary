@@ -18,4 +18,9 @@ public class OverlayElement {
         this.tag = tag;
         this.factoryEnum = factoryEnum;
     }
+
+    public OverlayElement(OverlayFactoryEnum factoryEnum) {
+        this.tag = factoryEnum.getValue();
+        this.factoryEnum = factoryEnum;
+    }
 }

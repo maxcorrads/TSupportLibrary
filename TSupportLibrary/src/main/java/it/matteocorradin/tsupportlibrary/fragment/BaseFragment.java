@@ -9,20 +9,21 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.IdRes;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
@@ -136,13 +137,42 @@ public abstract class BaseFragment extends Fragment implements OverlayHandler {
         return null;
     }
 
+    protected void modalFragment(@IdRes int id) {
+        modalFragment(id, null);
+    }
+
+    protected void modalFragment(@IdRes int id, Bundle args) {
+        View view = this.getView();
+        if (view != null) {
+            NavController navController = Navigation.findNavController(getView());
+            NavOptions options = new NavOptions.Builder().setEnterAnim(R.anim.slide_in_bottom).setExitAnim(R.anim.nothing).setPopEnterAnim(R.anim.nav_default_pop_enter_anim).setPopExitAnim(R.anim.slide_out_bottom)
+                    .build();
+            navController.navigate(id, args, options);
+        }
+    }
+
     protected void pushFragment(@IdRes int id) {
+        pushFragment(id, null);
+    }
+
+    protected void pushFragment(@IdRes int id, Bundle args) {
         View view = this.getView();
         if (view != null) {
             NavController navController = Navigation.findNavController(getView());
             NavOptions options = new NavOptions.Builder().setEnterAnim(R.anim.slide_in_right).setExitAnim(R.anim.slide_out_left).setPopEnterAnim(R.anim.slide_in_left).setPopExitAnim(R.anim.slide_out_right)
                     .build();
-            navController.navigate(id, null, options);
+            navController.navigate(id, args, options);
         }
+    }
+
+    //This method returns true if keyboard was shown before hiding.
+    public boolean hideSoftInputBase() {
+        Context context = getContext();
+        View view = getView();
+        if (context != null && view != null) {
+            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            return imm != null && imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+        return false;
     }
 }
