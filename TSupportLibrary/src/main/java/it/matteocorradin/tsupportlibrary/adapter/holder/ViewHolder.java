@@ -9,7 +9,7 @@ import it.matteocorradin.tsupportlibrary.adapter.model.AdapterDataGenericElement
 
 public class ViewHolder extends RecyclerView.ViewHolder {
 
-    Context mContext;
+    protected Context mContext;
 
     public ViewHolder(@NonNull View itemView) {
         super(itemView);

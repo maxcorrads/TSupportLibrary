@@ -1,7 +1,5 @@
 package it.matteocorradin.tsupportlibrary;
 
-import java.util.Objects;
-
 public class Optional<T> {
 
     private T value;
@@ -11,7 +9,8 @@ public class Optional<T> {
     }
 
     private Optional(T value) {
-        this.value = Objects.requireNonNull(value);
+        //this.value = Objects.requireNonNull(value);
+        this.value = value;
     }
 
     public static<T> Optional<T> empty() {
