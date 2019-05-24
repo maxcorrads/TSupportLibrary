@@ -15,7 +15,7 @@ import java.util.List;
 import it.matteocorradin.tsupportlibrary.adapter.HomeAdapter;
 import it.matteocorradin.tsupportlibrary.adapter.model.AdapterDataGenericElement;
 
-public abstract class MListFragment extends BaseFragment {
+public abstract class BottomSheetDialogMListFragment extends BottomSheetDialogBaseFragment {
 
     protected RecyclerView recyclerView;
 

@@ -1,7 +1,10 @@
 package it.matteocorradin.tsupportlibrary.adapter.utils;
 
+import android.annotation.SuppressLint;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
+
 import it.matteocorradin.tsupportlibrary.adapter.model.AdapterDataGenericElement;
 
 
@@ -11,8 +14,9 @@ public class AdapterDataGenericElementDiffCallback extends DiffUtil.ItemCallback
         return oldItem.getType() == newItem.getType();
     }
 
+    @SuppressLint("DiffUtilEquals")
     @Override
     public boolean areContentsTheSame(@NonNull AdapterDataGenericElement oldItem, @NonNull AdapterDataGenericElement newItem) {
-        return oldItem == newItem;
+        return oldItem.equals(newItem);
     }
 }

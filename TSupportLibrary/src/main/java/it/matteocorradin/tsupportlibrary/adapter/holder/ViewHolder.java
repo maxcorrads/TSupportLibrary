@@ -5,6 +5,8 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import it.matteocorradin.tsupportlibrary.adapter.HomeAdapter;
 import it.matteocorradin.tsupportlibrary.adapter.model.AdapterDataGenericElement;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
@@ -17,7 +19,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     }
 
 
-    public void bind(AdapterDataGenericElement generic) {
+    public void bind(AdapterDataGenericElement generic, HomeAdapter homeAdapter) {
 
     }
 }

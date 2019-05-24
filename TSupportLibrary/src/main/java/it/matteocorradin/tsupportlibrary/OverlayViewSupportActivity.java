@@ -3,12 +3,13 @@ package it.matteocorradin.tsupportlibrary;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import it.matteocorradin.tsupportlibrary.component.OverlayFactoryEnum;
 import it.matteocorradin.tsupportlibrary.component.OverlayFactoryProducer;
 import it.matteocorradin.tsupportlibrary.component.OverlayHandler;
@@ -110,10 +111,10 @@ public abstract class OverlayViewSupportActivity extends AppCompatActivity imple
         if (overlayContainerView != null) {
             for (int i = 0; i < overlayContainerView.getChildCount(); i++) {
                 if (overlayContainerView.getChildAt(i).getTag() instanceof Integer) {
-                    if (tags.contains((Integer) overlayContainerView.getChildAt(i).getTag())) {
-                        result.remove(overlayElementList.get(tags.indexOf((Integer) overlayContainerView.getChildAt(i).getTag())));
+                    if (tags.contains(overlayContainerView.getChildAt(i).getTag())) {
+                        result.remove(overlayElementList.get(tags.indexOf(overlayContainerView.getChildAt(i).getTag())));
                     } else {
-                        situatedComponentHashMap.remove((Integer) overlayContainerView.getChildAt(i).getTag());
+                        situatedComponentHashMap.remove(overlayContainerView.getChildAt(i).getTag());
                         toRemove.add(overlayContainerView.getChildAt(i));
                     }
                 }

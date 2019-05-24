@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
+
+import it.matteocorradin.tsupportlibrary.adapter.HomeAdapter;
 import it.matteocorradin.tsupportlibrary.adapter.model.AdapterDataGenericElement;
 
 public class ViewHolderWithLifecycle extends ViewHolder implements LifecycleOwner {
@@ -24,8 +26,10 @@ public class ViewHolderWithLifecycle extends ViewHolder implements LifecycleOwne
     }
 
     @Override
-    public void bind(AdapterDataGenericElement item) {
-        super.bind(item);
-        lifecycleRegistry.markState(Lifecycle.State.RESUMED);
+    public void bind(AdapterDataGenericElement item, HomeAdapter homeAdapter) {
+        super.bind(item, homeAdapter);
+        if (!lifecycleRegistry.getCurrentState().isAtLeast(Lifecycle.State.RESUMED)){
+            lifecycleRegistry.markState(Lifecycle.State.RESUMED);
+        }
     }
 }

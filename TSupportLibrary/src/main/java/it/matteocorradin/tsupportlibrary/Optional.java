@@ -10,7 +10,7 @@ public class Optional<T> {
 
     private Optional(T value) {
         //this.value = Objects.requireNonNull(value);
-        this.value = value;
+        this.value = value;//TO SUPPORT API 16
     }
 
     public static<T> Optional<T> empty() {
@@ -25,9 +25,21 @@ public class Optional<T> {
         void apply(T value);
     }
 
+    public interface VoidAction {
+        void apply();
+    }
+
     public void ifPresent(Action<T> action) {
         if (value != null) {
             action.apply(value);
+        }
+    }
+
+    public void ifPresentOrNot(Action<T> action, VoidAction notPresent) {
+        if (value != null) {
+            action.apply(value);
+        }else{
+            notPresent.apply();
         }
     }
 

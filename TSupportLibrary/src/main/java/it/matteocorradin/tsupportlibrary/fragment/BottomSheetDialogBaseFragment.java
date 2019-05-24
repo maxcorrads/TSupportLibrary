@@ -18,8 +18,9 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigator;
+
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ import java.util.List;
 import it.matteocorradin.tsupportlibrary.Optional;
 import it.matteocorradin.tsupportlibrary.OverlayElement;
 import it.matteocorradin.tsupportlibrary.OverlayViewSupportActivity;
+import it.matteocorradin.tsupportlibrary.R;
 import it.matteocorradin.tsupportlibrary.SysKb;
 import it.matteocorradin.tsupportlibrary.component.OverlayHandler;
 import it.matteocorradin.tsupportlibrary.component.SituatedComponent;
@@ -35,25 +37,38 @@ import it.matteocorradin.tsupportlibrary.fragment.nav.TNavSupport;
 import it.matteocorradin.tsupportlibrary.fragment.overlay.IOverlaySupport;
 import it.matteocorradin.tsupportlibrary.fragment.overlay.TOverlaySupport;
 
-public abstract class BaseFragment extends Fragment implements IOverlaySupport, OverlayHandler, INavSupport {
+public abstract class BottomSheetDialogBaseFragment extends BottomSheetDialogFragment implements IOverlaySupport, OverlayHandler, INavSupport {
 
     private static final int REQUEST_LOCATION = 2;
 
     private TNavSupport tNavSupport;
     private TOverlaySupport tOverlaySupport;
 
-    protected abstract @LayoutRes int getLayoutResourceId();
+    public interface BottomSheetDialogBaseFragmentListener{
+        void onDismiss();
+        void onClose();
+    }
+
+    protected BottomSheetDialogBaseFragmentListener listener;
+    public void setListener(BottomSheetDialogBaseFragmentListener listener) {
+        this.listener = listener;
+    }
+
+    protected abstract @LayoutRes
+    int getLayoutResourceId();
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getLayoutResourceId(), container, false);
-        onCreateViewSuperInit(view);
-        return view;
-    }
-
-    protected void onCreateViewSuperInit(View view){
         tNavSupport = new TNavSupport(view);
+        return view;
     }
 
     protected void initView(View view){
@@ -81,9 +96,7 @@ public abstract class BaseFragment extends Fragment implements IOverlaySupport, 
     }
 
     public void goBack() {
-        if (tNavSupport != null) {
-            tNavSupport.goBack();
-        }
+        tNavSupport.goBack();
     }
 
     @Override
@@ -133,22 +146,9 @@ public abstract class BaseFragment extends Fragment implements IOverlaySupport, 
 
     //This method returns true if keyboard was shown before hiding.
     public boolean hideSoftInputBase() {
-        if (tOverlaySupport != null) {
-            return tOverlaySupport.hideSoftInputBase();
-        }
-        return false;
+        return tOverlaySupport.hideSoftInputBase();
     }
 
-    public void showFragmentFromModalBack(@IdRes int id){
-        if (tNavSupport != null) {
-            tNavSupport.showFragmentFromModalBack(id);
-        }
-    }
-    public void showFragmentFromModalBack(@IdRes int id, Bundle args){
-        if (tNavSupport != null) {
-            tNavSupport.showFragmentFromModalBack(id, args);
-        }
-    }
     public void showFragment(@IdRes int id){
         if (tNavSupport != null) {
             tNavSupport.showFragment(id);
@@ -179,10 +179,9 @@ public abstract class BaseFragment extends Fragment implements IOverlaySupport, 
             tNavSupport.pushFragment(id, args);
         }
     }
-    public void pushFragmentSharedElement(@IdRes int id, Bundle args, Navigator.Extras navigatorExtras){
+    public void pushFragmentSharedElement(@IdRes int id, Bundle args, Navigator.Extras navigatorExtras) {
         if (tNavSupport != null) {
             tNavSupport.pushFragmentSharedElement(id, args, navigatorExtras);
         }
     }
-
 }
