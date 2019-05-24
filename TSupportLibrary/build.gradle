@@ -1,5 +1,21 @@
+apply plugin: 'com.novoda.bintray-release'
 apply plugin: 'com.android.library'
 
+publish {
+
+    def groupProjectID = 'it.matteocorradin.tsupportlibrary'
+    def artifactProjectID = 'TSupportLibrary'
+    def publishVersionID = '1.0'
+
+    userOrg = 'maxcorrads'
+    repoName = 'TSupportLibrary'
+    groupId = groupProjectID
+    artifactId = artifactProjectID
+    publishVersion = publishVersionID
+    desc = ''
+    website = 'https://github.com/maxcorrads/TSupportLibrary'
+
+}
 android {
     compileSdkVersion 28
 
