@@ -4,6 +4,5 @@ import it.matteocorradin.tsupportlibrary.adapter.AdapterDataViewHolderAbstractFa
 
 public interface IAdapterDataElementType {
     String getName();
-    int getId();
     AdapterDataViewHolderAbstractFactory getFactory();
 }
