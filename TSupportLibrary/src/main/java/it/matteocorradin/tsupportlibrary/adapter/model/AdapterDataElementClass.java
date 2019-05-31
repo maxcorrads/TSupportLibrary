@@ -7,10 +7,11 @@ public class AdapterDataElementClass {
     private static final ArrayList<String> elements
             = new ArrayList<>();
 
-    public static void addADET(String adet){
+    public static int addADET(String adet){
         if (!elements.contains(adet)){
             elements.add(adet);
         }
+        return elements.indexOf(adet);
     }
 
     public static IAdapterDataElementType getADET(final int n){
