@@ -1,22 +1,6 @@
 package it.matteocorradin.tsupportlibrary.maps;
 
-import android.content.Context;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
-
-import it.matteocorradin.tsupportlibrary.maps.model.CountryIso3;
-
-public class MapsUtils {
+/*public class MapsUtils {
 
     public static @Nullable CountryIso3 findCountryIso3(@NonNull Context context, @NonNull String alpha3Code){
         String json = null;
@@ -44,3 +28,4 @@ public class MapsUtils {
     }
 
 }
+*/
