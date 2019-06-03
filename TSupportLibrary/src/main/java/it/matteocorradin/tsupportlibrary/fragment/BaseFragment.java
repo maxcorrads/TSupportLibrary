@@ -25,9 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.matteocorradin.tsupportlibrary.Optional;
-import it.matteocorradin.tsupportlibrary.OverlayElement;
 import it.matteocorradin.tsupportlibrary.OverlayViewSupportActivity;
 import it.matteocorradin.tsupportlibrary.SysKb;
+import it.matteocorradin.tsupportlibrary.component.OverlayAbstractFactory;
 import it.matteocorradin.tsupportlibrary.component.OverlayHandler;
 import it.matteocorradin.tsupportlibrary.component.SituatedComponent;
 import it.matteocorradin.tsupportlibrary.fragment.nav.INavSupport;
@@ -64,7 +64,7 @@ public abstract class BaseFragment extends Fragment implements IOverlaySupport, 
         return tOverlaySupport.getBaseActivity();
     }
 
-    protected List<OverlayElement> overlayElementList(){
+    protected List<OverlayAbstractFactory> overlayElementList(){
         return new ArrayList<>();
     }
 

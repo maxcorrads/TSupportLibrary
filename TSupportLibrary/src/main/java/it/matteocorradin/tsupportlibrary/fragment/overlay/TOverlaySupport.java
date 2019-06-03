@@ -9,19 +9,19 @@ import androidx.fragment.app.FragmentActivity;
 import java.util.List;
 
 import it.matteocorradin.tsupportlibrary.Optional;
-import it.matteocorradin.tsupportlibrary.OverlayElement;
 import it.matteocorradin.tsupportlibrary.OverlayViewSupportActivity;
+import it.matteocorradin.tsupportlibrary.component.OverlayAbstractFactory;
 import it.matteocorradin.tsupportlibrary.component.OverlayHandler;
 
 public class TOverlaySupport implements IOverlaySupport {
 
     private OverlayHandler overlayHandler;
-    private List<OverlayElement> overlayElementList;
+    private List<OverlayAbstractFactory> overlayElementList;
     private FragmentActivity fragmentActivity;
     private View view;
     private Context context;
 
-    public TOverlaySupport(OverlayHandler overlayHandler, List<OverlayElement> overlayElementList, FragmentActivity fragmentActivity, View view, Context context) {
+    public TOverlaySupport(OverlayHandler overlayHandler, List<OverlayAbstractFactory> overlayElementList, FragmentActivity fragmentActivity, View view, Context context) {
         this.overlayHandler = overlayHandler;
         this.overlayElementList = overlayElementList;
         this.fragmentActivity = fragmentActivity;

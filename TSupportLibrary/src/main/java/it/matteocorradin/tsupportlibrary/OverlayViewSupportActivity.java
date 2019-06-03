@@ -10,12 +10,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import it.matteocorradin.tsupportlibrary.component.OverlayFactoryEnum;
-import it.matteocorradin.tsupportlibrary.component.OverlayFactoryProducer;
+import it.matteocorradin.tsupportlibrary.component.OverlayAbstractFactory;
 import it.matteocorradin.tsupportlibrary.component.OverlayHandler;
 import it.matteocorradin.tsupportlibrary.component.SituatedComponent;
 import it.matteocorradin.tsupportlibrary.component.VoidOverlayHandler;
-
 
 public abstract class OverlayViewSupportActivity extends AppCompatActivity implements IOverlayViewSupportActivity {
 
@@ -82,28 +80,25 @@ public abstract class OverlayViewSupportActivity extends AppCompatActivity imple
         return false;
     }
 
-    private void addOverlay(OverlayFactoryEnum factoryEnum, Integer tag) {
-        if (!hasOverlay(tag)) {
-            OverlayFactoryProducer producer = getOverlayFactoryProducer();
-            if (producer != null) {
-                addOverlayInternal(producer.getFactory(factoryEnum).getSituatedComponent(this, this), tag);
-            }
+    private void addOverlay(OverlayAbstractFactory factoryEnum) {
+        if (!hasOverlay(factoryEnum.getTag())) {
+            addOverlayInternal(factoryEnum.getSituatedComponent(this, this), factoryEnum.getTag());
         }
     }
 
     @Override
-    public void addOverlay(List<OverlayElement> overlayElementList) {
-       List<OverlayElement> elementsToAdd = removeOverlayNotContainedIn(overlayElementList);
-       for (OverlayElement element: elementsToAdd) {
-           addOverlay(element.getFactoryEnum(), element.getTag());
+    public void addOverlay(List<OverlayAbstractFactory> overlayElementList) {
+       List<OverlayAbstractFactory> elementsToAdd = removeOverlayNotContainedIn(overlayElementList);
+       for (OverlayAbstractFactory element: elementsToAdd) {
+           addOverlay(element);
        }
     }
 
-    private List<OverlayElement> removeOverlayNotContainedIn(List<OverlayElement> overlayElementList) {
+    private List<OverlayAbstractFactory> removeOverlayNotContainedIn(List<OverlayAbstractFactory> overlayElementList) {
         RelativeLayout overlayContainerView = overlayContainerView();
-        List<OverlayElement> result = new ArrayList<>();
+        List<OverlayAbstractFactory> result = new ArrayList<>();
         List<Integer> tags = new ArrayList<>();
-        for (OverlayElement element: overlayElementList){
+        for (OverlayAbstractFactory element: overlayElementList){
             result.add(element);
             tags.add(element.getTag());
         }
@@ -111,10 +106,10 @@ public abstract class OverlayViewSupportActivity extends AppCompatActivity imple
         if (overlayContainerView != null) {
             for (int i = 0; i < overlayContainerView.getChildCount(); i++) {
                 if (overlayContainerView.getChildAt(i).getTag() instanceof Integer) {
-                    if (tags.contains(overlayContainerView.getChildAt(i).getTag())) {
-                        result.remove(overlayElementList.get(tags.indexOf(overlayContainerView.getChildAt(i).getTag())));
+                    if (tags.contains((Integer)overlayContainerView.getChildAt(i).getTag())) {
+                        result.remove(overlayElementList.get(tags.indexOf((Integer)overlayContainerView.getChildAt(i).getTag())));
                     } else {
-                        situatedComponentHashMap.remove(overlayContainerView.getChildAt(i).getTag());
+                        situatedComponentHashMap.remove((Integer)overlayContainerView.getChildAt(i).getTag());
                         toRemove.add(overlayContainerView.getChildAt(i));
                     }
                 }
@@ -162,5 +157,4 @@ public abstract class OverlayViewSupportActivity extends AppCompatActivity imple
         return Optional.empty();
     }
 
-    protected abstract OverlayFactoryProducer getOverlayFactoryProducer();
 }
