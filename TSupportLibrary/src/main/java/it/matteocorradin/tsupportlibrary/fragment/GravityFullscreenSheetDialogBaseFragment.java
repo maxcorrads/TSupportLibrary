@@ -212,7 +212,7 @@ public abstract class GravityFullscreenSheetDialogBaseFragment extends DialogFra
             tNavSupport.pushFragmentSharedElement(id, args, navigatorExtras);
         }
     }
-    
+
     public void reloadOverlays(){
         if (tOverlaySupport != null){
             tOverlaySupport.reloadOverlays();

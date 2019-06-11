@@ -5,7 +5,7 @@ publish {
 
     def groupProjectID = 'it.matteocorradin.tsupportlibrary'
     def artifactProjectID = 'TSupportLibrary'
-    def publishVersionID = '2.1'
+    def publishVersionID = '2.2'
 
     userOrg = 'maxcorrads'
     repoName = 'TSupportLibrary'
