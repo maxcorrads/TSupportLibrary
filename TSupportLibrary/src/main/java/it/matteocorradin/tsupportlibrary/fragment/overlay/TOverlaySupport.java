@@ -57,4 +57,9 @@ public class TOverlaySupport implements IOverlaySupport {
         return false;
     }
 
+    @Override
+    public void reloadOverlays() {
+        initView();
+    }
+
 }

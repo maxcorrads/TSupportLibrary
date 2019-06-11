@@ -184,4 +184,10 @@ public abstract class BottomSheetDialogBaseFragment extends BottomSheetDialogFra
             tNavSupport.pushFragmentSharedElement(id, args, navigatorExtras);
         }
     }
+
+    public void reloadOverlays(){
+        if (tOverlaySupport != null){
+            tOverlaySupport.reloadOverlays();
+        }
+    }
 }

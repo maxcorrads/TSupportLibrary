@@ -6,4 +6,5 @@ import it.matteocorradin.tsupportlibrary.OverlayViewSupportActivity;
 public interface IOverlaySupport {
     Optional<OverlayViewSupportActivity> getBaseActivity();
     boolean hideSoftInputBase();
+    void reloadOverlays();
 }

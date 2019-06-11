@@ -47,13 +47,13 @@ public abstract class GravityFullscreenSheetDialogBaseFragment extends DialogFra
     private TNavSupport tNavSupport;
     private TOverlaySupport tOverlaySupport;
 
-    public interface BottomSheetDialogBaseFragmentListener{
+    public interface GravityFullscreenSheetDialogBaseFragmentListener{
         void onDismiss();
         void onClose();
     }
 
-    protected BottomSheetDialogBaseFragmentListener listener;
-    public void setListener(BottomSheetDialogBaseFragmentListener listener) {
+    protected GravityFullscreenSheetDialogBaseFragmentListener listener;
+    public void setListener(GravityFullscreenSheetDialogBaseFragmentListener listener) {
         this.listener = listener;
     }
 
@@ -210,6 +210,12 @@ public abstract class GravityFullscreenSheetDialogBaseFragment extends DialogFra
     public void pushFragmentSharedElement(@IdRes int id, Bundle args, Navigator.Extras navigatorExtras) {
         if (tNavSupport != null) {
             tNavSupport.pushFragmentSharedElement(id, args, navigatorExtras);
+        }
+    }
+    
+    public void reloadOverlays(){
+        if (tOverlaySupport != null){
+            tOverlaySupport.reloadOverlays();
         }
     }
 }

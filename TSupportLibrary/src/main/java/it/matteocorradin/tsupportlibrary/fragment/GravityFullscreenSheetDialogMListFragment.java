@@ -12,12 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.matteocorradin.tsupportlibrary.adapter.DefaultAdapterDataGenericElementDiffCallback;
+import it.matteocorradin.tsupportlibrary.adapter.DefaultHomeAdapter;
 import it.matteocorradin.tsupportlibrary.adapter.HomeAdapter;
 import it.matteocorradin.tsupportlibrary.adapter.model.AdapterDataGenericElement;
 
 public abstract class GravityFullscreenSheetDialogMListFragment extends GravityFullscreenSheetDialogBaseFragment{
 
     protected RecyclerView recyclerView;
+    private HomeAdapter adapter;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -44,7 +47,12 @@ public abstract class GravityFullscreenSheetDialogMListFragment extends GravityF
         }
     }
 
-    protected abstract HomeAdapter getAdapter();
+    protected HomeAdapter getAdapter() {
+        if (adapter == null){
+            adapter = new DefaultHomeAdapter(new DefaultAdapterDataGenericElementDiffCallback());
+        }
+        return adapter;
+    }
 
     protected abstract List<AdapterDataGenericElement> getList();
 

@@ -185,4 +185,10 @@ public abstract class BaseFragment extends Fragment implements IOverlaySupport, 
         }
     }
 
+    public void reloadOverlays(){
+        if (tOverlaySupport != null){
+            tOverlaySupport.reloadOverlays();
+        }
+    }
+
 }
