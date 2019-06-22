@@ -5,7 +5,7 @@ publish {
 
     def groupProjectID = 'it.matteocorradin.tsupportlibrary'
     def artifactProjectID = 'TSupportLibrary'
-    def publishVersionID = '2.2'
+    def publishVersionID = '2.3'
 
     userOrg = 'maxcorrads'
     repoName = 'TSupportLibrary'
@@ -17,15 +17,13 @@ publish {
 
 }
 android {
-    compileSdkVersion 28
-
-
+    compileSdkVersion 29
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 28
-        versionCode 22
-        versionName "2.2"
+        targetSdkVersion 29
+        versionCode 23
+        versionName "2.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -53,7 +51,7 @@ dependencies {
 
     // use -ktx for Kotlin
     implementation "android.arch.navigation:navigation-ui:1.0.0"
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
     implementation 'com.google.code.gson:gson:2.8.5'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
