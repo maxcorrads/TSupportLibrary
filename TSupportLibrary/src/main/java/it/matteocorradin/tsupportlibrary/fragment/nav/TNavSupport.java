@@ -60,7 +60,8 @@ public class TNavSupport implements INavSupport {
         View view = this.getView();
         if (view != null) {
             NavController navController = Navigation.findNavController(getView());
-            NavOptions options = new NavOptions.Builder().setEnterAnim(R.anim.slide_in_bottom).setExitAnim(R.anim.nothing).setPopEnterAnim(R.anim.nav_default_pop_enter_anim).setPopExitAnim(R.anim.slide_out_bottom)
+            //NavOptions options = new NavOptions.Builder().setEnterAnim(R.anim.slide_in_bottom).setExitAnim(R.anim.nothing).setPopEnterAnim(R.anim.nav_default_pop_enter_anim).setPopExitAnim(R.anim.slide_out_bottom)
+            NavOptions options = new NavOptions.Builder().setEnterAnim(R.anim.slide_in_bottom).setExitAnim(R.anim.nothing).setPopExitAnim(R.anim.slide_out_bottom)
                     .build();
             navController.navigate(id, args, options);
         }
