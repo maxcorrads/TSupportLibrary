@@ -12,12 +12,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigator;
 
@@ -26,6 +29,7 @@ import java.util.List;
 
 import it.matteocorradin.tsupportlibrary.Optional;
 import it.matteocorradin.tsupportlibrary.OverlayViewSupportActivity;
+import it.matteocorradin.tsupportlibrary.R;
 import it.matteocorradin.tsupportlibrary.SysKb;
 import it.matteocorradin.tsupportlibrary.component.OverlayAbstractFactory;
 import it.matteocorradin.tsupportlibrary.component.OverlayHandler;
@@ -41,6 +45,7 @@ public abstract class BaseFragment extends Fragment implements IOverlaySupport, 
 
     private TNavSupport tNavSupport;
     private TOverlaySupport tOverlaySupport;
+    private float startZ;
 
     protected abstract @LayoutRes int getLayoutResourceId();
 
@@ -191,4 +196,41 @@ public abstract class BaseFragment extends Fragment implements IOverlaySupport, 
         }
     }
 
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        if (nextAnim != R.anim.nothing) {
+            Animation nextAnimation = AnimationUtils.loadAnimation(getContext(), nextAnim);
+            nextAnimation.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+                    if (getView() != null) {
+                        startZ = ViewCompat.getTranslationZ(getView());
+                        ViewCompat.setTranslationZ(getView(), 10f);
+                    }
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    if (getView() != null) {
+                        getView().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (getView() != null) {
+                                    ViewCompat.setTranslationZ(getView(), startZ);
+                                }
+                            }
+                        },100);
+                    }
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+            return nextAnimation;
+        } else {
+            return null;
+        }
+    }
 }
