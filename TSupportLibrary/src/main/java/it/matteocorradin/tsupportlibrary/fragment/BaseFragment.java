@@ -198,7 +198,7 @@ public abstract class BaseFragment extends Fragment implements IOverlaySupport, 
 
     @Override
     public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        if (nextAnim != R.anim.nothing) {
+        if (nextAnim != 0 && nextAnim != R.anim.nothing) {
             Animation nextAnimation = AnimationUtils.loadAnimation(getContext(), nextAnim);
             nextAnimation.setAnimationListener(new Animation.AnimationListener() {
                 @Override
