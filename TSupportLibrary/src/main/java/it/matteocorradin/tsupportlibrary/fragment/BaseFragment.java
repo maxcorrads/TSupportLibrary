@@ -69,7 +69,7 @@ public abstract class BaseFragment extends Fragment implements IOverlaySupport, 
         return tOverlaySupport.getBaseActivity();
     }
 
-    protected List<OverlayAbstractFactory> overlayElementList(){
+    public List<OverlayAbstractFactory> overlayElementList(){
         return new ArrayList<>();
     }
 

@@ -79,7 +79,7 @@ public abstract class BottomSheetDialogBaseFragment extends BottomSheetDialogFra
         return tOverlaySupport.getBaseActivity();
     }
 
-    protected List<OverlayAbstractFactory> overlayElementList(){
+    public List<OverlayAbstractFactory> overlayElementList(){
         return new ArrayList<>();
     }
 

@@ -82,7 +82,7 @@ public abstract class GravityFullscreenSheetDialogBaseFragment extends DialogFra
         return tOverlaySupport.getBaseActivity();
     }
 
-    protected List<OverlayAbstractFactory> overlayElementList(){
+    public List<OverlayAbstractFactory> overlayElementList(){
         return new ArrayList<>();
     }
 
