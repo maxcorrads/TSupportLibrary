@@ -5,7 +5,7 @@ publish {
 
     def groupProjectID = 'it.matteocorradin.tsupportlibrary'
     def artifactProjectID = 'TSupportLibrary'
-    def publishVersionID = '2.5'
+    def publishVersionID = '2.6'
 
     userOrg = 'maxcorrads'
     repoName = 'TSupportLibrary'
@@ -24,8 +24,8 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 25
-        versionName "2.5"
+        versionCode 26
+        versionName "2.6"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

@@ -27,7 +27,9 @@ public class TOverlaySupport implements IOverlaySupport {
         this.fragmentActivity = fragmentActivity;
         this.view = view;
         this.context = context;
-        initView();
+        if (overlayHandler.isOverlayEnabled()) {
+            initView();
+        }
     }
 
     @Override

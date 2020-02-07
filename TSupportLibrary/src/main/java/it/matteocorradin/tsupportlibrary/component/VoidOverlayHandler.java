@@ -11,4 +11,9 @@ public class VoidOverlayHandler implements OverlayHandler {
 
     }
 
+    @Override
+    public boolean isOverlayEnabled() {
+        return true;
+    }
+
 }
