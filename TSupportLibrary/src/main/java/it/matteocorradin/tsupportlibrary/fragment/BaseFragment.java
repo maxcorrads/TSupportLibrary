@@ -85,6 +85,11 @@ public abstract class BaseFragment extends Fragment implements IOverlaySupport, 
 
     }
 
+    @Override
+    public boolean isOverlayEnabled() {
+        return true;
+    }
+
     public void goBack() {
         if (tNavSupport != null) {
             tNavSupport.goBack();

@@ -95,6 +95,11 @@ public abstract class BottomSheetDialogBaseFragment extends BottomSheetDialogFra
 
     }
 
+    @Override
+    public boolean isOverlayEnabled() {
+        return true;
+    }
+
     public void goBack() {
         tNavSupport.goBack();
     }
@@ -190,4 +195,5 @@ public abstract class BottomSheetDialogBaseFragment extends BottomSheetDialogFra
             tOverlaySupport.reloadOverlays();
         }
     }
+
 }

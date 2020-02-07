@@ -123,6 +123,11 @@ public abstract class GravityFullscreenSheetDialogBaseFragment extends DialogFra
 
     }
 
+    @Override
+    public boolean isOverlayEnabled() {
+        return true;
+    }
+
     public void goBack() {
         tNavSupport.goBack();
     }
