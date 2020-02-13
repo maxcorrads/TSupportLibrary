@@ -241,11 +241,11 @@ public abstract class BaseFragment extends Fragment implements IOverlaySupport, 
         }
     }
 
-    public void isReady(ActivityContextCallable<Void> success){
+    public void isReady(ActivityContextCallable success){
         isReady(success, null);
     }
 
-    public void isReady(ActivityContextCallable<Void> success, Callable<Void> fail){
+    public void isReady(ActivityContextCallable success, Callable<Void> fail){
         Activity activity = getActivity();
         try {
             if (isAdded() && activity != null && getContext() != null) {
