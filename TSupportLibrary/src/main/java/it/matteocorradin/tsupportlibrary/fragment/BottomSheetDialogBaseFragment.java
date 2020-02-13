@@ -24,7 +24,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
+import it.matteocorradin.tsupportlibrary.ActivityContextCallable;
 import it.matteocorradin.tsupportlibrary.Optional;
 import it.matteocorradin.tsupportlibrary.OverlayViewSupportActivity;
 import it.matteocorradin.tsupportlibrary.R;
@@ -193,6 +195,26 @@ public abstract class BottomSheetDialogBaseFragment extends BottomSheetDialogFra
     public void reloadOverlays(){
         if (tOverlaySupport != null){
             tOverlaySupport.reloadOverlays();
+        }
+    }
+
+    public void isReady(ActivityContextCallable<Void> success){
+        isReady(success, null);
+    }
+
+    public void isReady(ActivityContextCallable<Void> success, Callable<Void> fail){
+        Activity activity = getActivity();
+        try {
+            if (isAdded() && activity != null && getContext() != null) {
+                if (success != null){
+                    success.call(activity, getContext());
+                }
+            }else{
+                if (fail != null) {
+                    fail.call();
+                }
+            }
+        } catch (Exception ignore) {
         }
     }
 
