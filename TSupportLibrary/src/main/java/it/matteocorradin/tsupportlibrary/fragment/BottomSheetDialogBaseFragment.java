@@ -3,7 +3,9 @@ package it.matteocorradin.tsupportlibrary.fragment;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -12,6 +14,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
@@ -20,6 +23,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.navigation.Navigator;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
@@ -38,6 +43,7 @@ import it.matteocorradin.tsupportlibrary.fragment.nav.INavSupport;
 import it.matteocorradin.tsupportlibrary.fragment.nav.TNavSupport;
 import it.matteocorradin.tsupportlibrary.fragment.overlay.IOverlaySupport;
 import it.matteocorradin.tsupportlibrary.fragment.overlay.TOverlaySupport;
+import it.matteocorradin.tsupportlibrary.utils.ScreenUtils;
 
 public abstract class BottomSheetDialogBaseFragment extends BottomSheetDialogFragment implements IOverlaySupport, OverlayHandler, INavSupport {
 
@@ -45,6 +51,44 @@ public abstract class BottomSheetDialogBaseFragment extends BottomSheetDialogFra
 
     private TNavSupport tNavSupport;
     private TOverlaySupport tOverlaySupport;
+
+    private ScreenUtils screenUtils;
+
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+        if (isFullscreen() && screenUtils != null) {
+            dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface dialog) {
+                    BottomSheetDialog d = (BottomSheetDialog) dialog;
+                    FrameLayout bottomSheet = d.findViewById(R.id.design_bottom_sheet);
+                    if (bottomSheet != null) {
+                        BottomSheetBehavior bsb = BottomSheetBehavior.from(bottomSheet);
+                        bsb.setPeekHeight(screenUtils.getHeight());
+                    }
+                }
+            });
+        }
+        return dialog;
+    }
+
+    @Override
+    public void onCancel(@NonNull DialogInterface dialog) {
+        super.onCancel(dialog);
+        if (listener != null){
+            listener.onClose();
+        }
+    }
+
+    @Override
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        super.onDismiss(dialog);
+        if (listener != null){
+            listener.onDismiss();
+        }
+    }
 
     public interface BottomSheetDialogBaseFragmentListener{
         void onDismiss();
@@ -63,6 +107,9 @@ public abstract class BottomSheetDialogBaseFragment extends BottomSheetDialogFra
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
+        if (getContext() != null && isFullscreen()) {
+            screenUtils = new ScreenUtils(getContext());
+        }
     }
 
     @Nullable
@@ -216,6 +263,10 @@ public abstract class BottomSheetDialogBaseFragment extends BottomSheetDialogFra
             }
         } catch (Exception ignore) {
         }
+    }
+
+    public boolean isFullscreen(){
+        return false;
     }
 
 }
