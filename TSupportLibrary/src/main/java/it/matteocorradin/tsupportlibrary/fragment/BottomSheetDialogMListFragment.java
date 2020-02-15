@@ -12,12 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.matteocorradin.tsupportlibrary.adapter.DefaultAdapterDataGenericElementDiffCallback;
+import it.matteocorradin.tsupportlibrary.adapter.DefaultHomeAdapter;
 import it.matteocorradin.tsupportlibrary.adapter.HomeAdapter;
 import it.matteocorradin.tsupportlibrary.adapter.model.AdapterDataGenericElement;
 
 public abstract class BottomSheetDialogMListFragment extends BottomSheetDialogBaseFragment {
 
     protected RecyclerView recyclerView;
+    private HomeAdapter adapter;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -44,8 +47,6 @@ public abstract class BottomSheetDialogMListFragment extends BottomSheetDialogBa
         }
     }
 
-    protected abstract HomeAdapter getAdapter();
-
     protected abstract List<AdapterDataGenericElement> getList();
 
     protected RecyclerView.LayoutManager getLayoutManager(){
@@ -54,6 +55,13 @@ public abstract class BottomSheetDialogMListFragment extends BottomSheetDialogBa
 
     protected List<RecyclerView.ItemDecoration> getItemDecorations(){
         return new ArrayList<>();
+    }
+
+    protected HomeAdapter getAdapter() {
+        if (adapter == null){
+            adapter = new DefaultHomeAdapter(new DefaultAdapterDataGenericElementDiffCallback());
+        }
+        return adapter;
     }
 
 }
