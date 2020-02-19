@@ -29,9 +29,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import it.matteocorradin.tsupportlibrary.ActivityContextCallable;
+import it.matteocorradin.tsupportlibrary.FailCallable;
 import it.matteocorradin.tsupportlibrary.Optional;
 import it.matteocorradin.tsupportlibrary.OverlayViewSupportActivity;
 import it.matteocorradin.tsupportlibrary.R;
@@ -249,19 +249,16 @@ public abstract class BottomSheetDialogBaseFragment extends BottomSheetDialogFra
         isReady(success, null);
     }
 
-    public void isReady(ActivityContextCallable success, Callable<Void> fail){
+    public void isReady(ActivityContextCallable success, FailCallable fail){
         Activity activity = getActivity();
-        try {
-            if (isAdded() && activity != null && getContext() != null) {
-                if (success != null){
-                    success.call(activity, getContext());
-                }
-            }else{
-                if (fail != null) {
-                    fail.call();
-                }
+        if (isAdded() && activity != null && getContext() != null) {
+            if (success != null){
+                success.call(activity, getContext());
             }
-        } catch (Exception ignore) {
+        }else{
+            if (fail != null) {
+                fail.call();
+            }
         }
     }
 
