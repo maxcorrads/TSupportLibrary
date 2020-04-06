@@ -70,8 +70,32 @@ public abstract class BottomSheetDialogBaseFragment extends BottomSheetDialogFra
                     }
                 }
             });
+        }else{
+            if (getDialogPeekHeight() != null){
+                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialog) {
+                        BottomSheetDialog d = (BottomSheetDialog) dialog;
+                        FrameLayout bottomSheet = d.findViewById(R.id.design_bottom_sheet);
+                        if (bottomSheet != null) {
+                            BottomSheetBehavior bsb = BottomSheetBehavior.from(bottomSheet);
+                            bsb.setPeekHeight(getDialogPeekHeight());
+                        }
+                    }
+                });
+            }else {
+                dialog.setOnShowListener(getDialogOnShowListener());
+            }
         }
         return dialog;
+    }
+
+    protected Integer getDialogPeekHeight() {
+        return null;
+    }
+
+    protected DialogInterface.OnShowListener getDialogOnShowListener() {
+        return null;
     }
 
     @Override
