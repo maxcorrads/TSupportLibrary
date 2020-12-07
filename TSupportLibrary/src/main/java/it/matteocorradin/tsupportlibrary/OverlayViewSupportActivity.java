@@ -15,7 +15,7 @@ import it.matteocorradin.tsupportlibrary.component.OverlayHandler;
 import it.matteocorradin.tsupportlibrary.component.SituatedComponent;
 import it.matteocorradin.tsupportlibrary.component.VoidOverlayHandler;
 
-public abstract class OverlayViewSupportActivity extends AppCompatActivity implements IOverlayViewSupportActivity {
+public abstract class OverlayViewSupportActivity extends AppCompatActivity implements IOverlayViewSupportActivity, OverlayHandler {
 
     private HashMap<Integer, SituatedComponent> situatedComponentHashMap = new HashMap<>();
 
@@ -29,6 +29,16 @@ public abstract class OverlayViewSupportActivity extends AppCompatActivity imple
 
     public void setOverlayHandler(OverlayHandler overlayHandler) {
         this.overlayHandler = overlayHandler;
+    }
+
+    @Override
+    public void clickAction(SituatedComponent sender) {
+        overlayHandler.clickAction(sender);
+    }
+
+    @Override
+    public boolean isOverlayEnabled() {
+        return overlayHandler.isOverlayEnabled();
     }
 
     @Override
@@ -82,7 +92,7 @@ public abstract class OverlayViewSupportActivity extends AppCompatActivity imple
 
     private void addOverlay(OverlayAbstractFactory factoryEnum) {
         if (!hasOverlay(factoryEnum.getTag())) {
-            addOverlayInternal(factoryEnum.getSituatedComponent(this, overlayHandler()), factoryEnum.getTag());
+            addOverlayInternal(factoryEnum.getSituatedComponent(this, this), factoryEnum.getTag());
         }
     }
 
