@@ -82,7 +82,7 @@ public abstract class OverlayViewSupportActivity extends AppCompatActivity imple
 
     private void addOverlay(OverlayAbstractFactory factoryEnum) {
         if (!hasOverlay(factoryEnum.getTag())) {
-            addOverlayInternal(factoryEnum.getSituatedComponent(this, this), factoryEnum.getTag());
+            addOverlayInternal(factoryEnum.getSituatedComponent(this, overlayHandler()), factoryEnum.getTag());
         }
     }
 
